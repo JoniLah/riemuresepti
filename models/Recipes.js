@@ -18,12 +18,22 @@ const IngredientSchema = new Schema({
         required: true
     },
     amount: {
-        type: Number,
-        required: true
+        type: Number
     },
     unit: {
-        type: String,
-        default: "g"
+        type: String
+    },
+    heading: {
+        type: String
+    }
+});
+
+const CommonSchema = new Schema({
+    value: {
+        type: String
+    },
+    label: {
+        type: String
     }
 });
 
@@ -36,7 +46,7 @@ const RecipesSchema = new Schema({
         type: String
     },
     time: {
-        type: String,
+        type: new Schema(CommonSchema),
         required: true
     },
     brief: {
@@ -49,14 +59,11 @@ const RecipesSchema = new Schema({
     ingredients: [IngredientSchema],
     instructions: [InstructionsSchema],
     type: {
-        type: String,
+        type: new Schema(CommonSchema),
         required: true
     },
-    tags: [{
-        type: String,
-        lowercase: true,
-        trim: true
-    }],
+    tags: [CommonSchema],
+    allergens: [CommonSchema],
     rating: {
         type: Schema.Types.Decimal128
     }

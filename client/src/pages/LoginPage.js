@@ -13,7 +13,7 @@ const LoginPage = () => {
                 username, password
             })
             .then((res) => {
-
+                
             })
             .catch((err) => {
                 alert("Wrong credentials");

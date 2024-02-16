@@ -18,7 +18,7 @@ const App = () => {
     useEffect(() => {
         WebFont.load({
             google: {
-                families: ['Open Sans', 'Playpen Sans:400, 700', 'Valera Round:300,400,700']
+                families: ['Open Sans', 'Playpen Sans:400, 700', 'Outfit:300,400', 'Valera Round:300,400,700']
             }
         });
     }, []);

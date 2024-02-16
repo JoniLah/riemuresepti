@@ -4,16 +4,28 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const Recipe = require('../../models/Recipes');
 const Tag = require('../../models/Tag');
+const Redis = require('redis');
+const redisClient = Redis.createClient();
+const DEFAULT_EXPIRATION = 3600;
+
+(async () => {
+    await redisClient.connect();
+})();
 
 // @route   GET api/recipes/
 // @desc    GET all recipes
 // @access  Public
-router.get("/", (req, res) => {
-    Recipe
-        .find()
-        .sort({ id: "asc"})
-        .then(recipes => res.json(recipes))
-        .catch(err => res.status(404).json(err));
+router.get("/", async (req, res) => {
+    try {
+        let recipes = await Recipe.find().sort({ id: "asc" });
+
+        redisClient.setEx("recipes", DEFAULT_EXPIRATION, JSON.stringify(recipes));
+
+        res.json(recipes);
+    } catch (err) {
+        console.error("Error fetching recipes: ", err);
+        res.status(404).json(err);
+    }
 });
 
 // @route   GET api/recipes/id
@@ -53,7 +65,7 @@ router.post("/", async (req, res) => {
             brief: req.body.brief,
             type: req.body.type,
             tags: req.body.tags,
-            rating: req.body.rating
+            allergens: req.body.allergens
         });
         recipe = await recipe.save();
         res.send(recipe);

@@ -1,3 +1,24 @@
 .send-recipe-form {
+    margin-top: 12px;
 
+    .recipe-card {
+        margin: 0 12px;
+    }
+}
+
+.recipe-input {
+    margin: 4px 0;
+    padding: 9px 12px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 3px;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.wizard-tab-content {
+    display: flex;
+    justify-content: center;
 }

@@ -5,27 +5,30 @@ import './RecipeDetailPage.scss';
 import { IoMdTimer } from "react-icons/io";
 import { CiForkAndKnife } from "react-icons/ci";
 import { IoPricetagOutline } from "react-icons/io5";
+import Skeleton from '../components/Skeleton';
 
 const RecipeDetailPage = () => {
     const params = useParams();
     const [recipe, setRecipe] = useState({
         title: '',
         imgPath: '',
-        time: '',
+        time: [],
         brief: '',
-        type: '',
+        type: [],
         portions: 0,
         ingredients: [],
         instructions: [],
         tags: [],
-        rating: 0
+        allergens: []
     });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios
             .get(`http://localhost:5000/api/recipes/${params.id}`)
             .then(res => {
                 setRecipe(res.data);
+                setLoading(false);
             })
             .catch(err => {
                 console.log(err);
@@ -58,23 +61,49 @@ const RecipeDetailPage = () => {
         );
     });
 
+    const renderedAllergens = recipe.allergens.map((allergen, index) => {
+        if (!recipe.allergens || !Array.isArray(recipe.allergens) || recipe.allergens.length === 0) {
+            return;
+        }
+
+        return (
+            <span key={index} className="badge rounded-pill bg-warning mx-1 hover:cursor-default" title="Allergeeni">{allergen.label}</span>
+        );
+    });
+
+    const renderedTags = recipe.tags.map((tag, index) => {
+        if (!recipe.tags || !Array.isArray(recipe.tags) || recipe.tags.length === 0) {
+            return;
+        }
+
+        return (
+            <span key={index} className="badge rounded-pill bg-secondary mx-1 hover:cursor-default" title="Avainsana">{tag.label}</span>
+        );
+    });
+
     return (
         <div>
-            {console.log(recipe.imgPath)}
             <div className="recipe-detail__background-container">
-                <div className="recipe-detail__background-container__img" style={{ backgroundImage: `url(../${recipe.imgPath})` }}></div>
+                <div className="recipe-detail__background-container__img" style={{ backgroundImage: `url(${recipe.imgPath})` }}></div>
             </div>
 
             <div className="px-3">
-                <div className="recipe-detail__icons">
-                    <div><IoMdTimer className="green" /> {recipe.time}</div>
-                    <div><CiForkAndKnife className="orange" /> {recipe.type}</div>
-                    <div><IoPricetagOutline className="blue" /></div>
-                </div>
-                <div className="d-flex justify-content-center my-3">
+                <div className="d-flex justify-content-center flex-column items-center my-3">
                     <div className="d-flex align-items-center flex-column" style={{width: "620px"}}>
-                        <h1>{recipe.title}</h1>
-                        <div className="text-center">{recipe.brief}</div>
+                        <h1>{loading ? <Skeleton times={1} className="h-10 w-full" /> : recipe.title}</h1>
+                        <div className="text-center">{loading ? <Skeleton times={1} className="h-10 w-full" /> : recipe.brief}</div>
+                    </div>
+
+                    <div className="flex flex-column my-3">
+                        <div className="flex flex-row">
+                            {renderedAllergens}
+                            {renderedTags}
+                        </div>
+                    </div>
+                    
+                    <div className="recipe-detail__icons">
+                        <div><IoMdTimer className="green" /> {recipe.time.label}</div>
+                        <div><CiForkAndKnife className="orange" /> {recipe.type.label}</div>
                     </div>
                 </div>
                 
