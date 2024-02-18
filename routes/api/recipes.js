@@ -98,4 +98,27 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// @route   DELETE api/recipes/id
+// @desc    Delete a recipe
+// @access  Public
+router.delete("/:id", async (req, res) => {
+    const recipeId = req.params.id;
+
+    if (!ObjectId.isValid(recipeId)) {
+        return res.status(400).json({ error: "Invalid recipe ID" });
+    }
+
+    try {
+        const recipe = await Recipe.findByIdAndDelete(id);
+
+        if (!recipe) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+
+        res.json(recipe);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

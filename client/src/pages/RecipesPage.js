@@ -6,23 +6,24 @@ const RecipesPage = () => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        const controller = new AbortController();
-
-        axios
-            .get("https://riemuresepti-api.onrender.com/api/recipes", {
-            // .get("https://localhost:5000/api/recipes", {
-                signal: controller.signal
-            })
-            .then(res => {
-                console.log(res);
-                setRecipes(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-        
+        const fetchData = async () => {
+            try {
+                const controller = new AbortController();
+                const response = await axios.get("https://riemuresepti-api.onrender.com/api/recipes", {
+                    // .get("https://localhost:5000/api/recipes", {
+                    signal: controller.signal
+                });
+                setRecipes(response.data);
+            } catch (error) {
+                console.error("Error fetching recipes:", error);
+            }
+        };
+    
+        fetchData();
+    
         // Clean up function
         return () => {
+            const controller = new AbortController();
             controller.abort();
         };
     }, []);
