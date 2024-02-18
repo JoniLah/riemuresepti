@@ -31,22 +31,20 @@ router.get("/", async (req, res) => {
 // @route   GET api/recipes/id
 // @desc    GET a recipe by ID
 // @access  Public
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
     const recipeId = req.params.id;
 
     if (!ObjectId.isValid(recipeId)) {
         return res.status(400).json({ error: "Invalid recipe ID" });
     }
 
-    Recipe
-        .findById(recipeId)
-        .then(recipe => {
-            if (!recipe) {
-                return res.status(404).json({ error: "Recipe not found" });
-            }
-            res.json(recipe);
-        })
-        .catch(err => res.status(500).json({error: err.message }));
+    try {
+        let recipe = await Recipe.findById(recipeId);
+
+        res.json(recipe);
+    } catch (err) {
+        res.status(404).json(err);
+    }
 });
 
 // @route   POST api/recipes/
