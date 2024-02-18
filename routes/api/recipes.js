@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const Recipe = require('../../models/Recipes');
 const Tag = require('../../models/Tag');
-const Redis = require('redis');
-const redisClient = Redis.createClient();
-const DEFAULT_EXPIRATION = 3600;
+// const Redis = require('redis');
+// const redisClient = Redis.createClient();
+// const DEFAULT_EXPIRATION = 3600;
 
-(async () => {
-    await redisClient.connect();
-})();
+// (async () => {
+//     await redisClient.connect();
+// })();
 
 // @route   GET api/recipes/
 // @desc    GET all recipes
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
     try {
         let recipes = await Recipe.find().sort({ id: "asc" });
 
-        redisClient.setEx("recipes", DEFAULT_EXPIRATION, JSON.stringify(recipes));
+        // redisClient.setEx("recipes", DEFAULT_EXPIRATION, JSON.stringify(recipes));
 
         res.json(recipes);
     } catch (err) {
