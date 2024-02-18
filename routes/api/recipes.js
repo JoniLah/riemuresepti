@@ -43,7 +43,7 @@ router.get("/:id", async (req, res) => {
 
         res.json(recipe);
     } catch (err) {
-        res.status(404).json(err);
+        res.status(404).json("Error fetching recipe...", err);
     }
 });
 
