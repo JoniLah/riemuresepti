@@ -13,7 +13,7 @@ app.use(express.json({ extended: false }));
 app.use(cors());
 
 mongoose
-    .connect(process.env.MONGODB_URI || config.mongoURI)
+    .connect(process.env.mongoURI || config.mongoURI)
     .then(() => console.log("MongoDB connected"))
     .catch(err => {
         console.log(err.mesage);
