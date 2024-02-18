@@ -41,9 +41,14 @@ router.get("/:id", async (req, res) => {
     try {
         let recipe = await Recipe.findById(recipeId);
 
+        if (!recipe) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+
         res.json(recipe);
     } catch (err) {
-        res.status(404).json("Error fetching recipe...", err);
+        console.error("Error fetching recipe:", err);
+        res.status(500).json({ error: "Internal server error." });
     }
 });
 
