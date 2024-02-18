@@ -37,6 +37,14 @@ const RecipeDetailPage = () => {
         fetchRecipe();
     }, [params.id]);
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!recipe) {
+        return <div>Recipe not found.</div>;
+    }
+
     const renderedIngredients = recipe.ingredients.map((ingredient, index) => {
         if (!recipe.ingredients || !Array.isArray(recipe.ingredients) || recipe.ingredients.length === 0) {
             return <p>Ladataan reseptiä...</p>
