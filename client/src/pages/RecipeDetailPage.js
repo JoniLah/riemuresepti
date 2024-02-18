@@ -25,9 +25,7 @@ const RecipeDetailPage = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const response = await axios.get(`https://riemuresepti-api.onrender.com/api/recipes/${params.id}`);
-                // .get(`http://localhost:5000/api/recipes/${params.id}`)
-                
+                const response = await axios.get(process.env.REACT_APP_BASE_URL + `/api/recipes/${params.id}`);
                 setRecipe(response.data);
                 setLoading(false);  
             } catch (err) {

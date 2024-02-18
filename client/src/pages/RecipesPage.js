@@ -9,8 +9,7 @@ const RecipesPage = () => {
         const fetchData = async () => {
             try {
                 const controller = new AbortController();
-                const response = await axios.get("https://riemuresepti-api.onrender.com/api/recipes", {
-                    // .get("https://localhost:5000/api/recipes", {
+                const response = await axios.get(process.env.REACT_APP_BASE_URL + "/api/recipes", {
                     signal: controller.signal
                 });
                 setRecipes(response.data);

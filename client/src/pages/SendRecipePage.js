@@ -115,8 +115,7 @@ const SendRecipePage = () => {
                     "Content-Type": "multipart/form-data",
                 }
             };
-            // const imageResponse = await axios.post("http://localhost:5000/api/uploadS3/upload", imageData, imageConfig);
-            const imageResponse = await axios.post("https://riemuresepti-api.onrender.com/api/uploadS3/upload", imageData, imageConfig);
+            const imageResponse = await axios.post(process.env.REACT_APP_BASE_URL + "/api/uploadS3/upload", imageData, imageConfig);
             // const imgPath = imageResponse.data.filePath;
             const imgPath = imageResponse.data.imageUrl;
     
@@ -130,8 +129,7 @@ const SendRecipePage = () => {
                 }
             };
             const body = JSON.stringify(newRecipe);
-            // const res = await axios.post("http://localhost:5000/api/recipes", body, config);
-            const res = await axios.post("https://riemuresepti-api.onrender.com/api/recipes", body, config);
+            const res = await axios.post(process.env.REACT_APP_BASE_URL + "/api/recipes", body, config);
             console.log("Success: ", res);
         } catch(err) {
             console.log(err.response.data);
