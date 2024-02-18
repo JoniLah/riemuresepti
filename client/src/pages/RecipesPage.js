@@ -9,7 +9,8 @@ const RecipesPage = () => {
         const controller = new AbortController();
 
         axios
-            .get("http://localhost:5000/api/recipes", {
+            // .get("http://localhost:5000/api/recipes", {
+            .get("https://localhost:5000/api/recipes", {
                 signal: controller.signal
             })
             .then(res => {

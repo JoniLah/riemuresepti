@@ -1,1 +1,0 @@
-module.exports = 'mongodb://username:password@url/db-name';

@@ -10,7 +10,8 @@ const store = configureStore({
     },
     middleware: (getDefaultMiddleWare) => {
         return getDefaultMiddleWare().concat(recipesApi.middleware);
-    }
+    },
+    devTools: false
 });
 
 setupListeners(store.dispatch);

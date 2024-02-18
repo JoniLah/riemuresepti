@@ -137,7 +137,7 @@ const SendRecipePage = () => {
     };
 
     const onChange = (event, index, field, isInstruction = false, isIngredient = false) => {
-        console.log(event, index, field);
+        //console.log(event, index, field);
         if (isInstruction || isIngredient) {
             // const newData = isInstruction ? [...instructions] : [...ingredients];
             const newData = isInstruction || isIngredient ? [...(isInstruction ? instructions : ingredients)] : { ...formData };
@@ -195,7 +195,7 @@ const SendRecipePage = () => {
                             <input className="recipe-input" value={title} type="text" placeholder="Aterian nimi" name="title" id={`title-${id}`} onChange={(event) => onChange(event, 1, 'title')} required />
                             <textarea className="recipe-input" value={brief} placeholder="Lyhyt kuvaus" name="brief" id={`brief-${id}`} rows="5" onChange={(event) => onChange(event, 1, 'brief')} maxLength="500" required></textarea>
                             <div className="flex flex-row items-center">
-                                <input className="recipe-input mr-2" value={portions} type="number" min="1" placeholder="Annoskoko" name="portions" id={`portions-${id}`} onChange={(event) => onChange(event, 1, 'portions')} required /> annosta
+                                <input className="recipe-input mr-2" value={portions} type="number" min="1" placeholder="Annoskoko" name="portions" id={`portions-${id}`} onChange={(event) => onChange(event, 1, 'portions')} required /> {portions < 2 ? <span style={{width: "62px"}}> annos</span> : <span style={{width: "62px"}}> annosta</span>}
                             </div>
                             <Select options={timeItems} className="my-1" onChange={(event) => setFormData({...formData, time: event})} defaultValue={time} isClearable={true} placeholder="Valmistusaika" noOptionsMessage={() => "Ei tuloksia"} />
                             <Select options={typeItems} className="my-1" onChange={(event) => setFormData({...formData, type: event})} defaultValue={type} isClearable={true} placeholder="Ruokalaji" noOptionsMessage={() => "Ei tuloksia"} />
@@ -270,16 +270,15 @@ const SendRecipePage = () => {
                                             onChange={(event) => onChange(event, index, 'stepNumber', true)}
                                             required
                                         />
-                                        <input
+                                        <textarea
                                             className="recipe-input"
-                                            type="text"
                                             placeholder="Kuvaus"
                                             name="description"
                                             id={`instruction-description-${index}-${id}`}
                                             value={instruction.description}
                                             onChange={(event) => onChange(event, index, 'description', true)}
-                                            required
-                                        />
+                                            required>
+                                        </textarea>
                                         {index > 0 && (
                                             <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 text-uppercase mt-3" type="button" onClick={() => removeItem(index, true)}>
                                                 Poista

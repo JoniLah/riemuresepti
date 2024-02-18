@@ -3,3 +3,5 @@ config/keys.js
 config/default.json
 client/public/uploads/*
 dump.rdb
+client/*
+uploads

@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import './RecipeDetailPage.scss';
 import { IoMdTimer } from "react-icons/io";
 import { CiForkAndKnife } from "react-icons/ci";
-import { IoPricetagOutline } from "react-icons/io5";
 import Skeleton from '../components/Skeleton';
 
 const RecipeDetailPage = () => {
@@ -100,7 +99,7 @@ const RecipeDetailPage = () => {
                             {renderedTags}
                         </div>
                     </div>
-                    
+
                     <div className="recipe-detail__icons">
                         <div><IoMdTimer className="green" /> {recipe.time.label}</div>
                         <div><CiForkAndKnife className="orange" /> {recipe.type.label}</div>
