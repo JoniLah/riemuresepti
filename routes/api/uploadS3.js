@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
-const config = require('config/default');
+const config = require('config');
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
 
