@@ -24,7 +24,8 @@ const RecipeDetailPage = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/api/recipes/${params.id}`)
+            // .get(`http://localhost:5000/api/recipes/${params.id}`)
+            .get(`https://riemuresepti-api.onrender.com/api/recipes/${params.id}`)
             .then(res => {
                 setRecipe(res.data);
                 setLoading(false);
