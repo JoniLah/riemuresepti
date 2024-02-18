@@ -19,7 +19,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     const file = req.file;
     const fileContent = fs.readFileSync(file.path);
     const params = {
-        Bucket: config.AWS_BUCKET_NAME,
+        Bucket: process.env.AWS_BUCKET_NAME || config.AWS_BUCKET_NAME,
         Key: `${uuid.v4()}-${file.originalname}`,
         Body: fileContent,
         ACL: 'public-read'
