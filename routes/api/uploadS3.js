@@ -7,8 +7,8 @@ const AWS = require('aws-sdk');
 const uuid = require('uuid');
 
 AWS.config.update({
-    accessKeyId: config.AWS_ACCESS_KEY_ID,
-    secretAccessKey: config.AWS_SECRET_ACCESS_KEY
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || config.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || config.AWS_SECRET_ACCESS_KEY
 });
 
 const s3 = new AWS.S3();
