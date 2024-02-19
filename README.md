@@ -9,3 +9,5 @@ Tämä on portfoliotyö, johon olen mm. käyttänyt seuraavia teknologioita:
 - MongoDB
 
 Verkkosivut ovat nähtävissä osoitteessa: https://riemuresepti.onrender.com/
+
+<strong>Huom.</strong> Reseptien latauksessa voi kestää hetken ilmaisen MongoDB clusterin hitauden takia.
