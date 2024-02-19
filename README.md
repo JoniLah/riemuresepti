@@ -1,4 +1,4 @@
-Riemuresepti on kuvitteellinen verkkosivosto, jonne käyttävät voivat lähettää valmistamiaan reseptejä.
+Riemuresepti on kuvitteellinen verkkosivusto, jonne käyttävät voivat lähettää valmistamiaan reseptejä.
 
 Tämä on portfoliotyö, johon olen mm. käyttänyt seuraavia teknologioita:
 - React.js
