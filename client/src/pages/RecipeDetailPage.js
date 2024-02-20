@@ -5,6 +5,7 @@ import './RecipeDetailPage.scss';
 import { IoMdTimer } from "react-icons/io";
 import { CiForkAndKnife } from "react-icons/ci";
 import Skeleton from '../components/Skeleton';
+import Loader from '../components/Loader';
 
 const RecipeDetailPage = () => {
     const params = useParams();
@@ -38,11 +39,11 @@ const RecipeDetailPage = () => {
     }, [params.id]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     if (!recipe) {
-        return <div>Recipe not found.</div>;
+        return <div>Reseptiä ei löytynyt.</div>;
     }
 
     const renderedIngredients = recipe.ingredients.map((ingredient, index) => {

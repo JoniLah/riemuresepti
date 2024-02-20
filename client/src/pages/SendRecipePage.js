@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select'
 import './SendRecipePage.scss';
 import axios from 'axios';
@@ -11,6 +12,7 @@ import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 
 const SendRecipePage = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: "",
         imgPath: "",
@@ -131,8 +133,9 @@ const SendRecipePage = () => {
             const body = JSON.stringify(newRecipe);
             const res = await axios.post(process.env.REACT_APP_BASE_URL + "/api/recipes", body, config);
             console.log("Success: ", res);
+            navigate.push("/");
         } catch(err) {
-            console.log(err.response.data);
+            console.log(err);
         }
     };
 

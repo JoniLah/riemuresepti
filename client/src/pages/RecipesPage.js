@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import Recipe from '../components/Recipe/Recipe';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 const RecipesPage = () => {
+    const [loading, setLoading] = useState(true);
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,10 @@ const RecipesPage = () => {
                     signal: controller.signal
                 });
                 setRecipes(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
+                setLoading(false);
             }
         };
     
@@ -33,7 +37,7 @@ const RecipesPage = () => {
 
     return (
         <div className="d-flex justify-content-space-between flex-wrap align-items-center">
-            {renderedRecipes}
+            {loading ? <Loader /> : renderedRecipes}
         </div>
     );
 };

@@ -1,0 +1,67 @@
+$radius: 7px;
+
+.custom-shape-divider-bottom-1708439220 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1708439220 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 70px;
+}
+
+.custom-shape-divider-bottom-1708439220 .shape-fill {
+    fill: #FFFFFF;
+}
+
+.hero {
+    position: relative;
+    min-height: 50dvh;
+    background: linear-gradient(176deg, rgba(54,175,24,1) 0%, rgba(54,166,26,1) 51%, rgba(52,147,29,1) 90%, rgba(46,101,56,1) 100%);
+
+    &__header, &__brief {
+        color: white;
+        text-align: center;
+    }
+
+    &__img {
+        box-shadow: 2px 2px 12px 1px rgba(10,66,18,1);
+        border-radius: $radius;
+        width: 348px;
+        height: auto;
+        display: block;
+        margin: auto;
+        
+        &-content {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: 0.3s;
+
+            &:hover {
+                opacity: 1;
+                color: white;
+                font-weight: bold;
+                border-radius: $radius;
+            }
+        }
+
+        &-container {
+            position: relative;
+        }
+    }
+}
